@@ -22,6 +22,7 @@
         "quotes": 0,
         "object-curly-spacing": 0,
         "indent": 0,
-        "comma-dangle": 0
+        "comma-dangle": 0,
+        "react/prop-types": 0
     }
 }

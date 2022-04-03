@@ -1,0 +1,22 @@
+.wrapper{
+  display: flex;
+  width: 100vw;
+  min-height: 100vh;
+  height: max-content;
+  justify-content: center;
+  position: absolute;
+  background-image: radial-gradient(circle, #5c0067 0%, #00d4ff 100%);
+  overflow-x: hidden;
+}
+
+.App {
+  display: flex;
+  margin: 100px 0;
+  height:max-content;
+  width: max-content;
+  border-radius: 30px;
+  background-color: white;
+  box-shadow: 7px 11px 16px 0px rgba(34, 60, 80, 0.2);
+  flex-direction: column;
+  align-items: center;
+}

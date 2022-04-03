@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
-
 import ReactSelect from "react-select";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -72,11 +71,11 @@ const Create = () => {
     name: "nestedItems",
     keyName: "nestedItemsId",
   });
-  const [data, setData] = useState(defaultValues);
+  // const [data, setData] = useState(defaultValues);
 
   const onSubmit = (formData) => {
     alert(JSON.stringify(formData));
-    setData(formData);
+    // setData(formData);
   };
 
   console.log(errors);
@@ -294,7 +293,7 @@ const Create = () => {
           type="button"
           onClick={() => {
             reset();
-            setData(defaultValues);
+            // setData(defaultValues);
           }}
         >
           🗑️ Reset form

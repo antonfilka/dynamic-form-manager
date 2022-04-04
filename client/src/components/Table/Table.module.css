@@ -1,11 +1,29 @@
-.table {
-  width: 80%;
+.tablewrapper {
+  width: 90%;
   padding-bottom: 20px;
 }
 
-  
+.button {
+  color: red;
+}
+
 a {
   text-decoration: none;
   color: #2c2c2c;
   font-weight: bold;
+}
+
+.link {
+  margin: 0 auto 20px 50px;
+}
+
+.array {
+  width: 100%;
+  display: flex;
+  column-gap: 30px;
+  margin: 5px 10px;
+}
+
+.arrayItem {
+  display: flex;
 }

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <div className={styles.header}>
-      <Link to="/">
+      <Link to="/home">
         <h2> 📋 List</h2>
       </Link>
       <Link to="/create">

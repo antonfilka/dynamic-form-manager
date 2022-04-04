@@ -2,58 +2,14 @@ import React from "react";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import ReactSelect from "react-select";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { schema, emptyDefaultValues } from "../../DataModels/DataModels";
 import styles from "./Create.module.css";
+import { formatToSend } from "../../formatters/formatToSend";
+import { api, API_URL } from "../../http/serverAPI";
+import ModeLabel from "./ModeLabel";
+import clsx from "clsx";
 
-const defaultValues = {
-  carName: "Alfa Romeo",
-  carOwnerName: "Anton",
-  description: "Alfa Romeo Stelvio quadrifoglio v6",
-  price: "66000",
-  carWeight: "2200",
-  carColor: "Red",
-  state: { value: "new", label: "new" },
-  type: { value: "Sports car", label: "Sports car" },
-  exchange: "exchangeFalse",
-  exchangeName: "BMW",
-  priceRange: { value: "20000-100000", label: "20000-100000" },
-  nestedItems: [
-    { name: "Leather seats", quality: { value: "good", label: "good" } },
-    { name: "Cruise control", quality: { value: "bad", label: "bad" } },
-  ],
-};
-
-const schema = yup.object().shape({
-  carName: yup.string().required("Car name is required"),
-  carOwnerName: yup.string().required("Car owner name is required"),
-  description: yup.string().max(50).required("Description is required"),
-  price: yup
-    .number("Price number is required")
-    .required("Price number is required"),
-  carWeight: yup.number("Price number is required"),
-  carColor: yup.string(),
-  state: yup
-    .object()
-    .nullable()
-    .shape({
-      value: yup.string().required("State is required"),
-    }),
-  type: yup
-    .object()
-    .nullable()
-    .shape({
-      value: yup.string().required("State is required"),
-    }),
-  exchangeName: yup.string().nullable(),
-  priceRange: yup
-    .object()
-    .nullable()
-    .shape({
-      value: yup.string().required("State is required"),
-    }),
-});
-
-const Create = () => {
+const Create = (props) => {
   const {
     register,
     handleSubmit,
@@ -62,26 +18,33 @@ const Create = () => {
     watch,
     formState: { errors },
   } = useForm({
-    defaultValues: defaultValues,
+    defaultValues: props.createData,
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: "nestedItems",
     keyName: "nestedItemsId",
   });
-  // const [data, setData] = useState(defaultValues);
 
   const onSubmit = (formData) => {
+    props.setCreateData({});
+    reset(emptyDefaultValues);
+    props.editMode
+      ? api
+          .post(`${API_URL}/updatecar`, formatToSend(formData))
+          .catch((errors) => console.log(errors))
+      : api
+          .post(`${API_URL}/setcars`, formatToSend(formData))
+          .catch((errors) => console.log(errors));
     alert(JSON.stringify(formData));
-    // setData(formData);
   };
-
-  console.log(errors);
 
   return (
     <div className={styles.create}>
+      <ModeLabel editMode={props.editMode} className={styles.modeWrapper} />
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <label>Car Name</label>
         <input
@@ -229,9 +192,9 @@ const Create = () => {
                     />
                   )}
                 />
-                {errors.state && (
+                {errors.priceRange && (
                   <p className={styles.selectionError}>
-                    {errors.state.value.message}
+                    {errors.priceRange.value.message}
                   </p>
                 )}
               </section>
@@ -263,9 +226,9 @@ const Create = () => {
                     />
                   )}
                 />
-                {errors.state && (
+                {errors.nestedItems && (
                   <p className={styles.selectionError}>
-                    {errors.state.value.message}
+                    {errors.nestedItems.value.message}
                   </p>
                 )}
               </section>
@@ -292,13 +255,15 @@ const Create = () => {
         <button
           type="button"
           onClick={() => {
-            reset();
-            // setData(defaultValues);
+            props.editMode ? null : reset();
           }}
+          className={clsx({ [styles.mute]: props.editMode })}
         >
           🗑️ Reset form
         </button>
-        <button type="submit">✅ Submit</button>
+        <button type="submit">
+          {props.editMode ? "🔄 Update" : "✅ Submit"}
+        </button>
       </form>
     </div>
   );

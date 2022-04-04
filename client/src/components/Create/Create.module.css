@@ -1,137 +1,170 @@
 .create {
-    width: 80%;
-    padding-bottom: 20px;
-  }
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+  padding-bottom: 20px;
+}
 
-  
-  input {
-    height: 30px;
-    width: 100%;
-    border: solid 1px;
-    border-color: rgb(211, 211, 211);
-    border-radius: 4px;
-    background-color: rgb(222, 227, 235);
-    padding-left: 10px;
-  }
-  
-  select {
-    height: 30px;
-    width: 100%;
-    border: solid 1px;
-    border-color: rgb(152, 220, 252);
-    border-radius: 4px;
-    background-color: #bee3db;
-    padding-left: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-  }
-  
-  button {
-    height: 40px;
-    border: none;
-    border-radius: 4px;
-    background-color: #ffffff;
-    padding: 10px;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  button:hover{
-    cursor: pointer;
-  }
+input {
+  height: 30px;
+  width: 100%;
+  border: solid 1px;
+  border-color: rgb(211, 211, 211);
+  border-radius: 4px;
+  background-color: rgb(222, 227, 235);
+  padding-left: 10px;
+}
 
-  label {
-    color: #2c2c2c;
-    font-weight: 500;
-    font-size: 14px;
-    margin-right: auto;
-  }
-  
-  section {
-    display: flex;
-    column-gap: 70px;
-    margin-bottom: 10px;
-    min-width: 150px;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    width: 100%;
-  }
-  
-  .form input {
-    margin-top: 5px;
-    margin-bottom: 15px;
-  }
-  
-  .radio {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .radioOption {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 20px;
-  }
-  
-  .radioOption input { 
-    margin: 0 0 0 20px;
-    width: 20px;
-  }
-  
-  .error {
-    margin-top: -10px;
-    margin-right: auto;
-    color: rgb(255, 59, 59);
-  }
+select {
+  height: 30px;
+  width: 100%;
+  border: solid 1px;
+  border-color: rgb(152, 220, 252);
+  border-radius: 4px;
+  background-color: #bee3db;
+  padding-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
 
-  .selectionError{
-    color: rgb(255, 59, 59);
-    margin-top: 10px;
-  }
+button {
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  background-color: #ffffff;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
 
-  .addNest{
-    font-size: 16px;
-    color: #363636;
-    margin-right: auto;
-    margin-bottom: 20px;
-  }
+button:hover {
+  cursor: pointer;
+}
 
-  .remove {
-    margin-left: auto;
-  }
-  
+label {
+  color: #2c2c2c;
+  font-weight: 500;
+  font-size: 14px;
+  margin-right: auto;
+}
 
-  .array {
-    width: 100%;
-    display: flex;
-    column-gap: 30px;
-    
-  }
+section {
+  display: flex;
+  column-gap: 70px;
+  margin-bottom: 10px;
+  min-width: 150px;
+}
 
-  .selection {
-    display: flex;
-    flex-direction: column;
-  }
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}
 
-  .exchange {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    column-gap: 20px;
-  }
+.form input {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
 
-  .inputs {
-    display: flex;
-   justify-content: flex-start;
-    column-gap: 30px;
-  }
+.radio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.radioOption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.radioOption input {
+  margin: 0 0 0 20px;
+  width: 20px;
+}
+
+.error {
+  margin-top: -10px;
+  margin-right: auto;
+  color: rgb(255, 59, 59);
+}
+
+.selectionError {
+  color: rgb(255, 59, 59);
+  margin-top: 10px;
+}
+
+.addNest {
+  font-size: 16px;
+  color: #363636;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.remove {
+  margin-left: auto;
+}
+
+.array {
+  width: 100%;
+  display: flex;
+  column-gap: 30px;
+}
+
+.selection {
+  display: flex;
+  flex-direction: column;
+}
+
+.exchange {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  column-gap: 20px;
+}
+
+.inputs {
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 30px;
+}
+
+.modeWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 150px;
+  max-width: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgb(222, 235, 229);
+}
+
+.Tlabel {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.Mlabel {
+  margin-left: 5px;
+  font-size: 18px;
+}
+
+
+.mute {
+  opacity: 10%;
+ 
+}

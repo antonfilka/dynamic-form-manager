@@ -23,6 +23,8 @@
         "object-curly-spacing": 0,
         "indent": 0,
         "comma-dangle": 0,
-        "react/prop-types": 0
+        "react/prop-types": 0,
+        "operator-linebreak": 0,
+        "react/jsx-key": 0
     }
 }

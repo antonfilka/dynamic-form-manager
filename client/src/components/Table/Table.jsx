@@ -5,25 +5,32 @@ import { useTable, useSortBy } from "react-table";
 import { api, API_URL } from "../../http/serverAPI";
 import { emptyDefaultValues } from "../../DataModels/DataModels";
 
-const Table = (props) => {
+const Table = ({
+  createData,
+  setCreateData,
+  tableData,
+  setTableData,
+  columnsData,
+  setEditMode,
+}) => {
   useEffect(() => {
     api
       .get(`${API_URL}/getcars`)
-      .then((responce) => props.setTableData(responce.data))
+      .then((responce) => setTableData(responce.data))
       .catch((errors) => console.log(errors));
   }, []);
 
   const navigate = useNavigate();
 
-  const data = React.useMemo(() => props.tableData);
-  const columns = props.columnsData;
+  const data = React.useMemo(() => tableData);
+  const columns = columnsData;
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useSortBy);
 
   const createButtonHandler = () => {
-    props.setCreateData(emptyDefaultValues);
-    props.setEditMode(false);
+    setCreateData(emptyDefaultValues);
+    setEditMode(false);
     navigate("/create");
   };
 

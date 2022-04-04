@@ -4,12 +4,15 @@ import ReactSelect from "react-select";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema, emptyDefaultValues } from "../../DataModels/DataModels";
 import styles from "./Create.module.css";
-import { cleanRequest, formatToSend } from "../../formatters/formatToSend";
+import {
+  cleanCreateRequest,
+  cleanUpdateRequest,
+} from "../../formatters/formatToSend";
 import { api, API_URL } from "../../http/serverAPI";
 import ModeLabel from "./ModeLabel";
 import clsx from "clsx";
 
-const Create = (props) => {
+const Create = ({ createData, setCreateData, editMode, setEditMode }) => {
   const {
     register,
     handleSubmit,
@@ -18,7 +21,7 @@ const Create = (props) => {
     watch,
     formState: { errors },
   } = useForm({
-    defaultValues: props.createData,
+    defaultValues: createData,
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
@@ -30,24 +33,24 @@ const Create = (props) => {
   });
 
   const onSubmit = (formData) => {
-    props.setCreateData({});
+    setCreateData({});
     reset(emptyDefaultValues);
-    props.editMode
+    editMode
       ? api
           .post(
             `${API_URL}/updatecar`,
-            cleanRequest(props.createData, formData)
+            cleanUpdateRequest(createData, formData)
           )
           .catch((errors) => console.log(errors))
       : api
-          .post(`${API_URL}/setcars`, formatToSend(formData))
+          .post(`${API_URL}/setcars`, cleanCreateRequest(formData))
           .catch((errors) => console.log(errors));
-    alert(JSON.stringify(formData));
+    setEditMode(false);
   };
 
   return (
     <div className={styles.create}>
-      <ModeLabel editMode={props.editMode} className={styles.modeWrapper} />
+      <ModeLabel editMode={editMode} className={styles.modeWrapper} />
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <label>Car Name</label>
         <input
@@ -258,15 +261,13 @@ const Create = (props) => {
         <button
           type="button"
           onClick={() => {
-            props.editMode ? null : reset();
+            editMode ? null : reset();
           }}
-          className={clsx({ [styles.mute]: props.editMode })}
+          className={clsx({ [styles.mute]: editMode })}
         >
           🗑️ Reset form
         </button>
-        <button type="submit">
-          {props.editMode ? "🔄 Update" : "✅ Submit"}
-        </button>
+        <button type="submit">{editMode ? "🔄 Update" : "✅ Submit"}</button>
       </form>
     </div>
   );

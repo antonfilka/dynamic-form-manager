@@ -38,6 +38,8 @@ class CarService {
           id: car.id,
         },
         data: {
+          exchangeName: null,
+          priceRange: null,
           features: {
             deleteMany: {},
           },
@@ -68,6 +70,7 @@ class CarService {
         },
       });
     }
+
     await prisma.cars.update({
       where: {
         id: car.id,

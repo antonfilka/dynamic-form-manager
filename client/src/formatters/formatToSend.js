@@ -1,5 +1,4 @@
 /* eslint-disable guard-for-in */
-
 import { filledDefaultValues } from "../DataModels/DataModels";
 
 export const formatToSend = (data) => {
@@ -57,7 +56,7 @@ export const formatToShow = (arr) => {
   return newFormat;
 };
 
-export const cleanRequest = (prev, curr) => {
+export const cleanUpdateRequest = (prev, curr) => {
   const prevModified = formatToSend(prev);
   const currModified = formatToSend(curr);
 
@@ -68,8 +67,16 @@ export const cleanRequest = (prev, curr) => {
   for (const key in currModified) {
     fields.includes(key) ? null : delete currModified[key];
   }
+  return currModified;
+};
 
-  console.log("fields", fields);
+export const cleanCreateRequest = (curr) => {
+  const currModified = formatToSend(curr);
+
+  for (const key in currModified) {
+    currModified[key] ? null : delete currModified[key];
+  }
+
   console.log("final", currModified);
 
   return currModified;

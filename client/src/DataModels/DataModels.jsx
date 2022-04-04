@@ -39,7 +39,7 @@ export const schema = yup.object().shape({
   description: yup.string().max(50).required("Description is required"),
   price: yup.number().required().typeError("Price number is required"),
   carWeight: yup.number().typeError("Weight should be numeric"),
-  carColor: yup.string(),
+  carColor: yup.string().nullable(),
   state: yup
     .object()
     .nullable()

@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./Create.module.css";
 
-const ModeLabel = (props) => {
+const ModeLabel = ({ editMode }) => {
   return (
     <div className={styles.mode}>
       <label className={styles.Tlabel}>Mode: </label>
-      {props.editMode ? (
+      {editMode ? (
         <label className={styles.Mlabel}>Edit</label>
       ) : (
         <label className={styles.Mlabel}>Create</label>

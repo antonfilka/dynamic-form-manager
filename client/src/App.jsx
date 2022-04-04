@@ -11,16 +11,17 @@ import { formatToShow } from "./formatters/formatToSend";
 
 const App = () => {
   const navigate = useNavigate();
+
   const [createData, setCreateData] = useState(filledDefaultValues);
+
   const [tableData, setTableData] = useState([]);
+
   const [editMode, setEditMode] = useState(false);
 
   const editButtonHandler = (id) => {
     const entity = tableData.filter((item) => item.id == id);
-    console.log("entity: ", entity);
     setCreateData(formatToShow(entity));
     setEditMode(true);
-    console.log(createData);
     navigate("/create");
   };
 
@@ -74,11 +75,22 @@ const App = () => {
       Cell: (original) => (
         <button
           onClick={() => {
-            console.log(original.row.original.id);
             editButtonHandler(original.row.original.id);
           }}
         >
           ✏️
+        </button>
+      ),
+    },
+    {
+      Header: "Show nested",
+      Cell: (original) => (
+        <button
+          onClick={() => {
+            console.log(original.row.original.features);
+          }}
+        >
+          🔗
         </button>
       ),
     },
@@ -111,6 +123,7 @@ const App = () => {
                 createData={createData}
                 setCreateData={setCreateData}
                 editMode={editMode}
+                setEditMode={setEditMode}
               />
             }
           />

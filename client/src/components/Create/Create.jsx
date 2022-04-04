@@ -4,7 +4,7 @@ import ReactSelect from "react-select";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema, emptyDefaultValues } from "../../DataModels/DataModels";
 import styles from "./Create.module.css";
-import { formatToSend } from "../../formatters/formatToSend";
+import { cleanRequest, formatToSend } from "../../formatters/formatToSend";
 import { api, API_URL } from "../../http/serverAPI";
 import ModeLabel from "./ModeLabel";
 import clsx from "clsx";
@@ -34,7 +34,10 @@ const Create = (props) => {
     reset(emptyDefaultValues);
     props.editMode
       ? api
-          .post(`${API_URL}/updatecar`, formatToSend(formData))
+          .post(
+            `${API_URL}/updatecar`,
+            cleanRequest(props.createData, formData)
+          )
           .catch((errors) => console.log(errors))
       : api
           .post(`${API_URL}/setcars`, formatToSend(formData))

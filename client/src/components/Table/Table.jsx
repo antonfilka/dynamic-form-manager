@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Table.module.css";
-import { useTable } from "react-table";
+import { useTable, useSortBy } from "react-table";
 import { api, API_URL } from "../../http/serverAPI";
 import { emptyDefaultValues } from "../../DataModels/DataModels";
 
@@ -18,10 +18,8 @@ const Table = (props) => {
   const data = React.useMemo(() => props.tableData);
   const columns = props.columnsData;
 
-  const tableInstance = useTable({ columns, data });
-
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    tableInstance;
+    useTable({ columns, data }, useSortBy);
 
   const createButtonHandler = () => {
     props.setCreateData(emptyDefaultValues);
@@ -41,7 +39,7 @@ const Table = (props) => {
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
                   <th
-                    {...column.getHeaderProps()}
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
                     style={{
                       background: "rgb(255, 255, 240)",
                       borderRadius: "10px",
@@ -52,6 +50,13 @@ const Table = (props) => {
                     }}
                   >
                     {column.render("Header")}
+                    <span>
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? " 🔼"
+                          : " 🔽"
+                        : ""}
+                    </span>
                   </th>
                 ))}
               </tr>

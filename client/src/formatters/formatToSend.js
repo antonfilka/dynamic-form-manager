@@ -1,3 +1,5 @@
+/* eslint-disable guard-for-in */
+
 import { filledDefaultValues } from "../DataModels/DataModels";
 
 export const formatToSend = (data) => {
@@ -35,6 +37,7 @@ export const formatToShow = (arr) => {
   const data = arr[0];
   const newFormat = {
     ...filledDefaultValues,
+    id: data.id,
     carName: data.carName,
     carOwnerName: data.carOwnerName,
     description: data.description,
@@ -52,4 +55,22 @@ export const formatToShow = (arr) => {
     })),
   };
   return newFormat;
+};
+
+export const cleanRequest = (prev, curr) => {
+  const prevModified = formatToSend(prev);
+  const currModified = formatToSend(curr);
+
+  const fields = Object.keys(currModified).filter(
+    (item) => currModified[item] !== prevModified[item]
+  );
+  fields.push("id");
+  for (const key in currModified) {
+    fields.includes(key) ? null : delete currModified[key];
+  }
+
+  console.log("fields", fields);
+  console.log("final", currModified);
+
+  return currModified;
 };

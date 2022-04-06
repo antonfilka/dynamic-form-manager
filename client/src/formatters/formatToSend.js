@@ -8,6 +8,7 @@ export const formatToSend = (data) => {
     delete tempData.exchange;
     delete tempData.exchangeName;
     delete tempData.priceRange;
+
     data.nestedItems.length == 0
       ? delete tempData.nestedItems
       : (tempData.nestedItems = tempData.nestedItems.map((item) => ({
@@ -18,6 +19,7 @@ export const formatToSend = (data) => {
     return tempData;
   } else {
     delete tempData.exchange;
+
     data.nestedItems.length == 0
       ? delete tempData.nestedItems
       : (tempData.nestedItems = tempData.nestedItems.map((item) => ({
@@ -34,6 +36,7 @@ export const formatToSend = (data) => {
 
 export const formatToShow = (arr) => {
   const data = arr[0];
+
   const newFormat = {
     ...filledDefaultValues,
     id: data.id,
@@ -53,6 +56,7 @@ export const formatToShow = (arr) => {
       quality: { value: item.quality, label: item.quality },
     })),
   };
+
   return newFormat;
 };
 
@@ -63,10 +67,13 @@ export const cleanUpdateRequest = (prev, curr) => {
   const fields = Object.keys(currModified).filter(
     (item) => currModified[item] !== prevModified[item]
   );
+
   fields.push("id");
+
   for (const key in currModified) {
     fields.includes(key) ? null : delete currModified[key];
   }
+
   return currModified;
 };
 
@@ -76,8 +83,6 @@ export const cleanCreateRequest = (curr) => {
   for (const key in currModified) {
     currModified[key] ? null : delete currModified[key];
   }
-
-  console.log("final", currModified);
 
   return currModified;
 };

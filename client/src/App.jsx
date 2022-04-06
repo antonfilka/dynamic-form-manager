@@ -4,7 +4,7 @@ import styles from "./App.module.css";
 import Header from "./components/Header/Header";
 import { Routes, Route } from "react-router-dom";
 import Table from "./components/Table/Table";
-import Create from "./components/Create/Create";
+import CreateComponent from "./components/Create/CreateComponent";
 import Welcome from "./components/WelcomePage/Welcome";
 import { filledDefaultValues } from "./DataModels/DataModels";
 import { formatToShow } from "./formatters/formatToSend";
@@ -119,7 +119,7 @@ const App = () => {
           <Route
             path="/create"
             element={
-              <Create
+              <CreateComponent
                 createData={createData}
                 setCreateData={setCreateData}
                 editMode={editMode}

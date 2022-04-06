@@ -36,63 +36,74 @@ const Table = ({
 
   return (
     <>
-      <button className={styles.link} onClick={() => createButtonHandler()}>
+      <button className={styles.link} onClick={createButtonHandler}>
         ➕ Creaty new entry
       </button>
       <div className={styles.tablewrapper}>
         <table {...getTableProps()}>
           <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                    style={{
-                      background: "rgb(255, 255, 240)",
-                      borderRadius: "10px",
-                      padding: "10px",
-                      color: "black",
-                      fontWeight: "bold",
-                      columnGap: "20px",
-                    }}
-                  >
-                    {column.render("Header")}
-                    <span>
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? " 🔼"
-                          : " 🔽"
-                        : ""}
-                    </span>
-                  </th>
-                ))}
-              </tr>
-            ))}
+            {headerGroups.map((headerGroup) => {
+              const { key, ...restHeaderGroupProps } =
+                headerGroup.getHeaderGroupProps();
+              return (
+                <tr key={key} {...restHeaderGroupProps}>
+                  {headerGroup.headers.map((column) => {
+                    const { key, ...restHeaderProps } = column.getHeaderProps(
+                      column.getSortByToggleProps()
+                    );
+                    return (
+                      <th
+                        key={key}
+                        {...restHeaderProps}
+                        style={{
+                          background: "rgb(255, 255, 240)",
+                          borderRadius: "10px",
+                          padding: "10px",
+                          color: "black",
+                          fontWeight: "bold",
+                          columnGap: "20px",
+                        }}
+                      >
+                        {column.render("Header")}
+                        <span>
+                          {column.isSorted
+                            ? column.isSortedDesc
+                              ? " 🔼"
+                              : " 🔽"
+                            : ""}
+                        </span>
+                      </th>
+                    );
+                  })}
+                </tr>
+              );
+            })}
           </thead>
 
           <tbody {...getTableBodyProps()}>
             {rows.map((row) => {
               prepareRow(row);
+              const { key, ...restRowProps } = row.getRowProps();
               return (
-                <>
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => {
-                      return (
-                        <td
-                          {...cell.getCellProps()}
-                          style={{
-                            padding: "10px",
-                            background: "aliceblue",
-                            borderRadius: "20px",
-                            textAlign: "center",
-                          }}
-                        >
-                          {cell.render("Cell")}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                </>
+                <tr key={key} {...restRowProps}>
+                  {row.cells.map((cell) => {
+                    const { key, ...restCellProps } = cell.getCellProps();
+                    return (
+                      <td
+                        key={key}
+                        {...restCellProps}
+                        style={{
+                          padding: "10px",
+                          background: "aliceblue",
+                          borderRadius: "20px",
+                          textAlign: "center",
+                        }}
+                      >
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
+                </tr>
               );
             })}
           </tbody>

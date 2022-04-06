@@ -12,7 +12,12 @@ import { api, API_URL } from "../../http/serverAPI";
 import ModeLabel from "./ModeLabel";
 import clsx from "clsx";
 
-const Create = ({ createData, setCreateData, editMode, setEditMode }) => {
+const CreateComponent = ({
+  createData,
+  setCreateData,
+  editMode,
+  setEditMode,
+}) => {
   const {
     register,
     handleSubmit,
@@ -37,10 +42,7 @@ const Create = ({ createData, setCreateData, editMode, setEditMode }) => {
     reset(emptyDefaultValues);
     editMode
       ? api
-          .post(
-            `${API_URL}/updatecar`,
-            cleanUpdateRequest(createData, formData)
-          )
+          .put(`${API_URL}/updatecar`, cleanUpdateRequest(createData, formData))
           .catch((errors) => console.log(errors))
       : api
           .post(`${API_URL}/setcars`, cleanCreateRequest(formData))
@@ -273,4 +275,4 @@ const Create = ({ createData, setCreateData, editMode, setEditMode }) => {
   );
 };
 
-export default Create;
+export default CreateComponent;

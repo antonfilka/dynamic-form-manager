@@ -4,6 +4,6 @@ const router = new Router();
 
 router.get("/getcars", carsController.getCars);
 router.post("/setcars", carsController.setCar);
-router.post("/updatecar", carsController.updateCar);
+router.put("/updatecar", carsController.updateCar);
 
 module.exports = router;
